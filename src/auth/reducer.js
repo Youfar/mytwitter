@@ -4,7 +4,8 @@ export const authReducer = handleActions({
         REQUEST_SIGN_UP: (state, action) => Object.assign({}, state, {}),
         COMPLETE_SIGN_UP: {
             next: (state, action) => Object.assign({}, state, {
-                signUpFlg: true
+                signUpFlg: true,
+                loginFlg: true
             }),
             throw: (state, action) => Object.assign({}, state, {
                 signUpMsg: action.payload.message

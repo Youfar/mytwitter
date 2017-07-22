@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types'
 import LoginForm from '../component/LoginForm';
-import {login} from '../action';
+import {login, signUp} from '../action';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import theme from '../../material_ui_raw_theme_file';
@@ -27,19 +27,21 @@ class Login extends Component {
     static propTypes = {
         // isFetching: PropTypes.bool,
         handleLoginSubmit: PropTypes.func.isRequired,
-        // handleRegisterSubmit: PropTypes.func.isRequired,
+        handleSignUpSubmit: PropTypes.func.isRequired,
     };
 
     render() {
         return (
             <div style={defaultStyle}>
                 <MuiThemeProvider muiTheme={theme}>
-                    <div style={containerStyle}>
-                        <LoginForm
-                        // isFetching={this.props.isFetching}
-                            handleLoginSubmit={this.props.handleLoginSubmit}
-                        // handleRegisterSubmit={this.props.handleRegisterSubmit}
-                        />
+                    <div>
+                        <h2>test</h2>
+                        <div style={containerStyle}>
+                            <LoginForm
+                                handleLoginSubmit={this.props.handleLoginSubmit}
+                                handleSignUpSubmit={this.props.handleSignUpSubmit}
+                            />
+                        </div>
                     </div>
                 </MuiThemeProvider>
             </div>);
@@ -48,14 +50,17 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        loginFlg: state.authReducer.loginFlg
+        loginFlg: state.authReducer.loginFlg,
+        signUpFlg: state.authReducer.signUpFlg
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     const handleLoginSubmit = (username, password) => dispatch(login(username, password));
+    const handleSignUpSubmit = (username, email, password) => dispatch(signUp(username, email, password));
     return {
         handleLoginSubmit,
+        handleSignUpSubmit
     };
 };
 

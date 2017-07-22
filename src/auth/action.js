@@ -37,7 +37,7 @@ export function signUp(username, email, password) {
         }).then(function (json) {
             console.log("response is ok");
             dispatch(completeSignUp(json));
-            browserHistory.push('/login');
+            browserHistory.push('/LoginSuccess');
         }).catch(function (err) {
             console.log("signUp error");
             dispatch(completeSignUp(new Error("ユーザアカウント名とパスワードを確認してください")));
