@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types'
-import { addTweet } from "../../tweet/action"
+import { addTweet, loadTweets } from "../../tweet/action"
 import Tweet from '../component/Tweet';
+import TweetCard from "../component/TweetCard";
+import {deleteTweet} from "../action";
 
 const containerStyle = {
     width: '300px',
@@ -18,15 +20,21 @@ const containerStyle = {
 class TweetContainer extends Component {
     static propTypes = {
         dispatchAddTweet: PropTypes.func.isRequired,
+        dispatchFetchTweet: PropTypes.func.isRequired,
+        dispatchDeleteTweet: PropTypes.func.isRequired,
     };
 
-    // componentWillMount() {
-    //     console.log('willMount');
-    //     this.props.dispatchFetchTodo();
-    // }
+    componentWillMount() {
+        console.log('willMount');
+        this.props.dispatchFetchTweet(this.props.token);
+    }
 
     handleAddTweet(text, token) {
         this.props.dispatchAddTweet(text, token);
+    };
+
+    handleDeleteTweet(tweetId, token) {
+        this.props.dispatchDeleteTweet(tweetId, token);
     };
 
     render() {
@@ -36,7 +44,11 @@ class TweetContainer extends Component {
                     token={this.props.token}
                     handleAddTweet={this.handleAddTweet.bind(this)}
                     // handleToggleTodo={this.handleToggleTodo.bind(this)}
-                    // handleDeleteTodo={this.handleDeleteTodo.bind(this)}
+                />
+                <TweetCard
+                    token={this.props.token}
+                    tweets={this.props.tweets}
+                    handleDeleteTweet={this.handleDeleteTweet.bind(this)}
                 />
             </div>);
     }
@@ -45,13 +57,18 @@ class TweetContainer extends Component {
 const mapStateToProps = (state) => {
     return {
         token: state.tokenReducer.token,
+        tweets: state.tweetReducer.tweets,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
+    const dispatchFetchTweet = (token) => dispatch(loadTweets(token));
     const dispatchAddTweet = (tweetContent, token) => dispatch(addTweet(tweetContent, token));
+    const dispatchDeleteTweet = (token, tweetId) => dispatch(deleteTweet(token, tweetId));
     return {
+        dispatchFetchTweet,
         dispatchAddTweet,
+        dispatchDeleteTweet,
     };
 };
 

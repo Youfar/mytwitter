@@ -23,45 +23,35 @@ export default class Tweet extends Component {
         // handleDeleteTodo: PropTypes.func.isRequired,
     };
 
-    // handleSubmit = (e) => {
-    //     const target = e.target;
-    //     e.preventDefault();
-    //     const action = this.props.handleAddTweet
-    //
-    //     action(
-    //         target.tweetContent.value.trim(),
-    //         this.props.token
-    //     );
-    //     // this.props.handleAddTweet(this.refs.tweetContent.value, this.props.token);
-    //     // this.refs.tweetContent.value = '';
-    // };
+    handleSubmit = (e) => {
+        const target = e.target;
+        e.preventDefault();
+        const action = this.props.handleAddTweet
+
+        action(
+            target.tweetContent.value.trim(),
+            this.props.token
+        );
+        // this.props.handleAddTweet(this.refs.tweetContent.value, this.props.token);
+        // this.refs.tweetContent.value = '';
+    };
 
     render() {
-        const { token } = this.props;
-
         return (
-            <form onSubmit={e => {
-                const target = e.target;
-                e.preventDefault();
-                const action = this.props.handleAddTweet
-                action(
-                    target.tweetContent.value.trim(),
-                    token,
-                )
-                // this.props.handleAddTweet(this.refs.tweetContent, token);
-                // this.refs.tweetContent.value = '';
-            }}>
-                <TextField type="text" id="tweetContent"
-                           floatingLabelText="な〰にやりますか〰"
-                           floatingLabelStyle={styles.floatingLabelStyle}
-                           floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                           underlineShow={false}
-                           multiLine={true}
-                           rows={2}
-                           rowsMax={4}
-                />
-                <RaisedButton type="submit" label="ツイート" primary={true} />
-            </form>
+            <div>
+                <form onSubmit={this.handleSubmit}>
+                    <TextField type="text" id="tweetContent"
+                               floatingLabelText="な〰にやりますか〰"
+                               floatingLabelStyle={styles.floatingLabelStyle}
+                               floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                               underlineShow={false}
+                               multiLine={true}
+                               rows={2}
+                               rowsMax={4}
+                    />
+                    <RaisedButton type="submit" label="ツイート" primary={true} />
+                </form>
+            </div>
         );
     }
 }

@@ -35,3 +35,73 @@ export function addTweet(tweet, token) {
         });
     }
 }
+
+const GET_TWEETS_API_URL = 'http://localhost:8080/getTweet';
+export const TWEET_LIST_ACTIONS = {
+    REQUEST_GET_TWEETS: 'REQUEST_GET_TWEETS',
+    COMPLETE_GET_TWEETS: 'COMPLETE_GET_TWEETS',
+    // FAILED_GET_TWEETS: 'FAILED_GET_TWEETS'
+};
+
+const requestGetTweets = createAction(TWEET_LIST_ACTIONS.REQUEST_GET_TWEETS);
+const completeGetTweets = createAction(TWEET_LIST_ACTIONS.COMPLETE_GET_TWEETS, (tweets) => ({tweets: tweets}));
+
+export function loadTweets(token) {
+    return function(dispatch) {
+        dispatch(requestGetTweets());
+        const headers = new Headers();
+        headers.append("x-auth-token", token);
+        return fetch(GET_TWEETS_API_URL, {
+            mode: 'cors',
+            method: 'GET',
+            headers: headers,
+        }).then(function(response) {
+            if (response.status === 401) {
+                throw Error();
+            }
+            return response.json();
+        }).then(function(json){
+            dispatch(completeGetTweets(json));
+        }).catch(function(err) {
+            dispatch(completeGetTweets(err));
+        });
+    };
+}
+
+const DELETE_TWEET_API_URL = 'http://localhost:8080/deleteTweet';
+export const TWEET_ACTIONS = {
+    REQUEST_DELETE_TWEET: 'REQUEST_DELETE_TWEET',
+    COMPLETE_DELETE_TWEET: 'COMPLETE_DELETE_TWEET',
+    // FAILED_DELETE_TWEET: 'FAILED_DELETE_TWEET'
+};
+
+const requestDeleteTweet = createAction(TWEET_ACTIONS.REQUEST_DELETE_TWEET);
+const completeDeleteTweet = createAction(TWEET_ACTIONS.COMPLETE_DELETE_TWEET, (tweetId) => ({tweetId: tweetId}));
+// const failedDeleteTweet: ActionCreator = createAction(TWEET_ACTIONS.FAILED_DELETE_TWEET, (errMsg) => ({errMsg: errMsg}));
+
+export function deleteTweet(token, tweetId) {
+    return function(dispatch) {
+        dispatch(requestDeleteTweet());
+        const headers = new Headers();
+        headers.append('x-auth-token', token);
+        const body = new FormData();
+        body.append("tweetId", tweetId.toString());
+        return fetch(DELETE_TWEET_API_URL, {
+            mode: 'cors',
+            method: 'POST',
+            headers: headers,
+            body: body
+        }).then(function(response) {
+            if (!response.ok) {
+                throw new Error();
+            }
+            console.log("point1");
+            dispatch(completeDeleteTweet(tweetId));
+        }).catch(function(err) {
+            console.log("point2");
+            dispatch(completeDeleteTweet(err));
+            // dispatch(removeToken());
+            // dispatch(failedDeleteTweet(err.message));
+        });
+    }
+}
