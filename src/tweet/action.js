@@ -105,3 +105,112 @@ export function deleteTweet(token, tweetId) {
         });
     }
 }
+
+const GET_FAVORITE_TWEETS_API_URL = 'http://localhost:8080/getFavoriteTweet';
+export const GET_FAVORITE_TWEETS_ACTIONS = {
+    REQUEST_GET_FAVORITE_TWEETS: 'REQUEST_GET_FAVORITE_TWEETS',
+    COMPLETE_GET_FAVORITE_TWEETS: 'COMPLETE_GET_FAVORITE_TWEETS',
+    // FAILED_GET_FAVORITE_TWEETS: 'FAILED_GET_FAVORITE_TWEETS'
+};
+
+const requestGetFavoriteTweets = createAction(GET_FAVORITE_TWEETS_ACTIONS.REQUEST_GET_FAVORITE_TWEETS);
+const completeGetFavoriteTweets = createAction(GET_FAVORITE_TWEETS_ACTIONS.COMPLETE_GET_FAVORITE_TWEETS, (json) => ({favoriteTweets: json}));
+// const failedGetFavoriteTweets: ActionCreator = createAction(GET_FAVORITE_TWEETS_ACTIONS.FAILED_GET_FAVORITE_TWEETS);
+
+export function loadFavoriteTweets(token) {
+    return function(dispatch) {
+        dispatch(requestGetFavoriteTweets());
+        const headers = new Headers();
+        headers.append("x-auth-token", token);
+        return fetch(GET_FAVORITE_TWEETS_API_URL, {
+            method: 'GET',
+            headers: headers,
+        }).then(function(response) {
+            if (response.status === 401) {
+                throw new Error();
+            }
+            return response.json()
+        }).then(function(json) {
+            dispatch(completeGetFavoriteTweets(json))
+        }).catch(function(err) {
+            // dispatch(failedGetFavoriteTweets(err.message))
+            dispatch(completeGetFavoriteTweets(err));
+        });
+    }
+}
+
+// const ADD_FAVORITE_TWEET_API_URL = 'http://localhost:4000/api/addFavoriteTweet';
+const ADD_FAVORITE_TWEET_API_URL = 'http://localhost:8080/addFavoriteTweet';
+export const ADD_FAVORITE_TWEET_ACTIONS = {
+    REQUEST_ADD_FAVORITE_TWEET: 'REQUEST_ADD_FAVORITE_TWEET',
+    COMPLETE_ADD_FAVORITE_TWEET: 'COMPLETE_ADD_FAVORITE_TWEET',
+    // FAILED_ADD_FAVORITE_TWEET_ON_FAVORITE: 'FAILED_ADD_FAVORITE_TWEET_ON_FAVORITE'
+};
+
+const requestAddFavoriteTweet = createAction(ADD_FAVORITE_TWEET_ACTIONS.REQUEST_ADD_FAVORITE_TWEET);
+const completeAddFavoriteTweet = createAction(ADD_FAVORITE_TWEET_ACTIONS.COMPLETE_ADD_FAVORITE_TWEET, (tweetId) => ({tweetId: tweetId}));
+// const failedAddFavoriteTweet: ActionCreator = createAction(ADD_FAVORITE_TWEET_ON_FAVORITE_ACTIONS.FAILED_ADD_FAVORITE_TWEET_ON_FAVORITE);
+
+export function addFavoriteTweet(token, tweetId) {
+    return function(dispatch) {
+        dispatch(requestAddFavoriteTweet());
+        const headers = new Headers();
+        headers.append("x-auth-token", token);
+        const body = new FormData();
+        body.append("tweetId", tweetId.toString());
+        return fetch(ADD_FAVORITE_TWEET_API_URL, {
+            mode: 'cors',
+            method: 'POST',
+            headers: headers,
+            body: body
+        }).then(function(response) {
+            if (response.status === 401) {
+                throw new Error();
+            }
+            return response.text();
+        }).then(function() {
+            dispatch(completeAddFavoriteTweet(tweetId));
+        }).catch(function(err) {
+            // dispatch(failedAddFavoriteTweet(err.message));
+            dispatch(completeAddFavoriteTweet(err));
+        })
+    }
+}
+
+//const DELETE_FAVORITE_TWEET_API_URL = 'http://localhost:4000/api/deleteFavoriteTweet';
+const DELETE_FAVORITE_TWEET_API_URL = 'http://localhost:8080/deleteFavoriteTweet';
+export const DELETE_FAVORITE_TWEET_ACTIONS = {
+    REQUEST_DELETE_FAVORITE_TWEET: 'REQUEST_DELETE_FAVORITE_TWEET',
+    COMPLETE_DELETE_FAVORITE_TWEET: 'COMPLETE_DELETE_FAVORITE_TWEET',
+    // FAILED_DELETE_FAVORITE_TWEET_ON_FAVORITE: 'FAILED_DELETE_FAVORITE_TWEET_ON_FAVORITE'
+};
+
+const requestDeleteFavoriteTweet = createAction(DELETE_FAVORITE_TWEET_ACTIONS.REQUEST_DELETE_FAVORITE_TWEET);
+const completeDeleteFavoriteTweet = createAction(DELETE_FAVORITE_TWEET_ACTIONS.COMPLETE_DELETE_FAVORITE_TWEET, (tweetId) => ({tweetId: tweetId}));
+// const failedDeleteFavoriteTweet: ActionCreator = createAction(DELETE_FAVORITE_TWEET_ON_FAVORITE_ACTIONS.FAILED_DELETE_FAVORITE_TWEET_ON_FAVORITE);
+
+export function deleteFavoriteTweet(token, tweetId) {
+    return function(dispatch) {
+        dispatch(requestDeleteFavoriteTweet());
+        const headers = new Headers();
+        headers.append("x-auth-token", token);
+        const body = new FormData();
+        body.append("tweetId", tweetId.toString());
+        return fetch(DELETE_FAVORITE_TWEET_API_URL, {
+            mode: 'cors',
+            method: 'POST',
+            headers: headers,
+            body: body
+        }).then(function(response) {
+            if (response.status === 401) {
+                throw new Error();
+            }
+            return response.text()
+        }).then(function() {
+            dispatch(completeDeleteFavoriteTweet(tweetId))
+        }).catch(function(err) {
+            // dispatch(failedDeleteFavoriteTweet())
+            dispatch(completeDeleteFavoriteTweet(err));
+        });
+    }
+}

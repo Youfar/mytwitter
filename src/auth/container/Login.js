@@ -23,6 +23,12 @@ const containerStyle = {
     margin: 'auto',
 };
 
+const titleStyle = {
+    marginTop: '100px',
+    marginLeft: '600px',
+    position: 'relative',
+};
+
 class Login extends Component {
     static propTypes = {
         // isFetching: PropTypes.bool,
@@ -35,7 +41,7 @@ class Login extends Component {
             <div style={defaultStyle}>
                 <MuiThemeProvider muiTheme={theme}>
                     <div>
-                        <h2>test</h2>
+                        <p style={titleStyle}>test</p>
                         <div style={containerStyle}>
                             <LoginForm
                                 handleLoginSubmit={this.props.handleLoginSubmit}

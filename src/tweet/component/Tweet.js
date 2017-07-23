@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import TweetCard from './TweetCard';
 import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
