@@ -37,7 +37,8 @@ export function signUp(username, email, password) {
         }).then(function (json) {
             console.log("response is ok");
             dispatch(completeSignUp(json));
-            browserHistory.push('/LoginSuccess');
+            // browserHistory.push('/LoginSuccess');
+            browserHistory.push('/TimeLine');
         }).catch(function (err) {
             console.log("signUp error");
             dispatch(completeSignUp(new Error("ユーザアカウント名とパスワードを確認してください")));
@@ -77,7 +78,8 @@ export function login(username, password) {
             dispatch(completeLogin());
             dispatch(setToken(token, username));
             console.log("token set ok");
-            browserHistory.push('/LoginSuccess');
+            // browserHistory.push('/LoginSuccess');
+            browserHistory.push('/TimeLine');
         }).catch(function (err) {
             console.log("error");
             dispatch(completeLogin(new Error("ユーザアカウント名とパスワードを確認してください")));

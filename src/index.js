@@ -8,9 +8,11 @@ import { Router, Route, browserHistory } from 'react-router';
 
 import Login from './auth/container/Login';
 import { authReducer } from './auth/reducer';
-import { tokenReducer } from "./token/reducer"
+import { tokenReducer } from "./token/reducer";
+import { tweetReducer } from "./tweet/reducer";
 import LoginSuccess from "./LoginSuccess";
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import TimeLine from "./timeline/container/TimeLine";
 
 injectTapEventPlugin();
 
@@ -20,6 +22,7 @@ const store = createStore(
     combineReducers({
         authReducer: authReducer,
         tokenReducer: tokenReducer,
+        tweetReducer: tweetReducer,
     }), composeEnhancers(applyMiddleware(thunk))
 );
 
@@ -34,7 +37,8 @@ render(
     <Provider store={store}>
         <Router history={browserHistory}>
             <Route path="/" component={Login} />
-            <Route path="/loginSuccess" component={LoginSuccess} onEnter={requireAuth}/>
+            <Route path="/TimeLine" component={TimeLine} onEnter={requireAuth}/>
+            {/*<Route path="/loginSuccess" component={LoginSuccess} onEnter={requireAuth}/>*/}
         </Router>
     </Provider>,
     document.getElementById('root')
