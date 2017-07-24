@@ -2,11 +2,12 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types'
 import {getAllUsers} from "../action";
+import UserList from "../component/UserList";
 
 const UserListStyle = {
     marginTop: '200px',
-    marginLeft: '900px',
-    width: '600px',
+    marginLeft: '1500px',
+    width: '200px',
     height: '200px',
     position: 'absolute',
     top: 0,
@@ -32,6 +33,7 @@ class UserContainer extends Component {
                 <div style={UserListStyle}>
                     <UserList
                         token={this.props.token}
+                        users={this.props.users}
                         // handleToggleTodo={this.handleToggleTodo.bind(this)}
                     />
                 </div>
@@ -41,6 +43,7 @@ class UserContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        token: state.tokenReducer.token,
         users: state.userReducer.users,
     }
 };

@@ -21,6 +21,14 @@ export const authReducer = handleActions({
             }),
         },
 
-
+        REQUEST_LOGOUT: (state, action) => Object.assign({}, state, {}),
+        COMPLETE_LOGOUT: {
+            next: (state, action) => Object.assign({}, state, {
+                loginFlg: false
+            }),
+            throw: (state, action) => Object.assign({}, state, {
+                loginMsg: action.payload.message
+            }),
+        },
     }, {userId: 0,  signUpMsg: "", loginMsg: "", loginFlg: false, signUpFlg: false}
 );

@@ -14,10 +14,18 @@ import {userReducer} from "./user/reducer";
 import LoginSuccess from "./LoginSuccess";
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import TimeLine from "./timeline/container/TimeLine";
+import Profile from "./profile/container/ProfileContainer";
+import persistState from 'redux-localstorage';
+import App from "./App";
+import {followReducer} from "./follow/reducer";
 
 injectTapEventPlugin();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const enhancer = compose(
+    persistState("tokenReducer", "authReducer"),
+);
 
 const store = createStore(
     combineReducers({
@@ -25,7 +33,8 @@ const store = createStore(
         tokenReducer: tokenReducer,
         tweetReducer: tweetReducer,
         userReducer: userReducer,
-    }), composeEnhancers(applyMiddleware(thunk))
+        followReducer: followReducer,
+    }), composeEnhancers(applyMiddleware(thunk), enhancer)
 );
 
 const requireAuth = (nextState, replace) => {
@@ -39,7 +48,9 @@ render(
     <Provider store={store}>
         <Router history={browserHistory}>
             <Route path="/" component={Login} />
+            <Route path="/app" component={App}/>
             <Route path="/TimeLine" component={TimeLine} onEnter={requireAuth}/>
+            <Route path="/profile/:userId" component={Profile}/>
             {/*<Route path="/loginSuccess" component={LoginSuccess} onEnter={requireAuth}/>*/}
         </Router>
     </Provider>,
