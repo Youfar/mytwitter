@@ -35,8 +35,8 @@ class FollowContainer extends Component {
         return (
             <div>
                 <List style={followPanelStyle}>
-                    <ListItem primaryText={"Follow: " + this.props.followings.length}  />
-                    <ListItem primaryText={"Follower: " + this.props.followers.length}  />
+                    <ListItem primaryText={"フォロー " + this.props.followings.length}  />
+                    <ListItem primaryText={"フォロワー " + this.props.followers.length}  />
                 </List>
             </div>);
     }

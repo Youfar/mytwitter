@@ -11,7 +11,7 @@ export default class TweetCard extends Component {
     };
 
     render() {
-        const { tweets } = this.props
+        const { tweets, myUserName } = this.props
         return (
             <section className="main">
                 <ul>
@@ -27,11 +27,12 @@ export default class TweetCard extends Component {
                             />
                             <CardText>
                                 {tweet.tweetContent}
+                                {/*disable={myUserName===tweet.creator.username ? true : false}*/}
                             </CardText>
                             <CardActions>
                                 <FlatButton label="お気に入り"  onClick={() => this.props.handleAddFavoriteTweet(this.props.token, tweet.tweetId)}/>
                                 <FlatButton label="お気に入り削除"  onClick={() => this.props.handleDeleteFavoriteTweet(this.props.token, tweet.tweetId)}/>/>
-                                <FlatButton label="削除" onClick={() => this.props.handleDeleteTweet(this.props.token, tweet.tweetId)} />
+                                <FlatButton label="削除" disabled={myUserName===tweet.creator.username ? false : true} onClick={() => this.props.handleDeleteTweet(this.props.token, tweet.tweetId)} />
                             </CardActions>
                         </Card>
                     )

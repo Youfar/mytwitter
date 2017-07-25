@@ -10,6 +10,7 @@ import UserContainer from "../../user/container/UserContainer";
 // import {authReducer as prevProps} from "../../auth/reducer";
 import {tokenReducer as prevProps} from "../../token/reducer";
 import FollowContainer from "../../follow/container/FollowContainer";
+import {Tabs, Tab} from 'material-ui/Tabs';
 
 // const titleStyle = {
 //     // marginTop: '100px',
@@ -29,9 +30,17 @@ class TimeLine extends Component {
                             title="ホーム"
                             iconElementRight={<FlatButton label="ログアウト" onClick={() => dispatch(logout())}/>}
                         />
-                        <TweetContainer/>
+                        {/*<TweetContainer/>*/}
                         <UserContainer/>
                         <FollowContainer/>
+                        <Tabs>
+                            <Tab label="タイムライン">
+                                <TweetContainer/>
+                            </Tab>
+                            <Tab label="出勤">
+                                <p>aaaaa</p>
+                            </Tab>
+                        </Tabs>
                     </div>
                 </MuiThemeProvider>
             </div>);

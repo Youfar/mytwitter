@@ -77,6 +77,7 @@ class TweetContainer extends Component {
                     <TweetCard
                         token={this.props.token}
                         tweets={this.props.tweets}
+                        myUserName={this.props.myUserName}
                         handleDeleteTweet={this.handleDeleteTweet.bind(this)}
                         handleAddFavoriteTweet={this.handleAddFavoriteTweet.bind(this)}
                         handleDeleteFavoriteTweet={this.handleDeleteFavoriteTweet.bind(this)}
@@ -89,6 +90,7 @@ class TweetContainer extends Component {
 const mapStateToProps = (state) => {
     return {
         token: state.tokenReducer.token,
+        myUserName: state.tokenReducer.username,
         tweets: state.tweetReducer.tweets,
     }
 };

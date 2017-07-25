@@ -23,5 +23,28 @@ export const followReducer = handleActions(
                 text: action.payload.message
             })
         },
+
+        // REQUEST_GET_FOLLOWINGS_BYID: (state, action) => Object.assign({}, state, {}),
+        // COMPLETE_GET_FOLLOWINGS_BYID: {
+        //     next: (state, action) => Object.assign({}, state, {
+        //         text: action.payload.text,
+        //         targetFollowings: action.payload.followings
+        //     }),
+        //     throw: (state, action) => Object.assign({}, state, {
+        //         text: action.payload.message
+        //     })
+        // },
+
+        // REQUEST_GET_FOLLOWERS: (state, action) => Object.assign({}, state, {}),
+        // COMPLETE_GET_FOLLOWERS: {
+        //     next: (state, action) => Object.assign({}, state, {
+        //         text: action.payload.text,
+        //         followers: action.payload.followers
+        //     }),
+        //     throw: (state, action) => Object.assign({}, state, {
+        //         text: action.payload.message
+        //     })
+        // },
+
     }, {text: "", followings: [], followers: []}
 )

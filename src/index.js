@@ -18,6 +18,7 @@ import Profile from "./profile/container/ProfileContainer";
 import persistState from 'redux-localstorage';
 import App from "./App";
 import {followReducer} from "./follow/reducer";
+import {profileReducer} from "./profile/reducer";
 
 injectTapEventPlugin();
 
@@ -34,6 +35,7 @@ const store = createStore(
         tweetReducer: tweetReducer,
         userReducer: userReducer,
         followReducer: followReducer,
+        profileReducer: profileReducer,
     }), composeEnhancers(applyMiddleware(thunk), enhancer)
 );
 
