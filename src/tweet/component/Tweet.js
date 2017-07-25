@@ -43,7 +43,7 @@ export default class Tweet extends Component {
                                floatingLabelText="な〰にやりますか〰"
                                floatingLabelStyle={styles.floatingLabelStyle}
                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                               underlineShow={false}
+                               underlineShow={true}
                                multiLine={true}
                                rows={2}
                                rowsMax={4}

@@ -52,11 +52,11 @@ class Profile extends Component {
                 <MuiThemeProvider muiTheme={theme}>
                     <div>
                         <AppBar
-                            title="ホーム"
+                            title={targetUser.username}
                             iconElementRight={<FlatButton label="ログアウト" onClick={() => dispatch(logout())}/>}
                         />
                         {/*<h1>welcome {this.props.params.userId}</h1>*/}
-                        <h1>welcome {targetUser.username}</h1>
+                        {/*<h1>welcome {targetUser.username}</h1>*/}
                         <button onClick={() => dispatch(addFollowing(token, this.props.params.userId))}>Follow</button>
                         {/*<TweetContainer/>*/}
                         {/*<UserContainer/>*/}
