@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types'
 import {getAllUsers} from "../action";
 import UserList from "../component/UserList";
+import {Paper} from "material-ui";
 
 const UserListStyle = {
     marginTop: '200px',
@@ -15,6 +16,15 @@ const UserListStyle = {
     right: 0,
     bottom: 0,
     // margin: 'auto',
+};
+
+const paperStyle = {
+    height: 600,
+    width: 600,
+    marginTop: 100,
+    marginLeft: 1400,
+    textAlign: 'center',
+    display: 'inline-block',
 };
 
 class UserContainer extends Component {
@@ -30,13 +40,19 @@ class UserContainer extends Component {
     render() {
         return (
             <div>
-                <div style={UserListStyle}>
+                <Paper style ={paperStyle} zDepth={2}>
                     <UserList
                         token={this.props.token}
                         users={this.props.users}
-                        // handleToggleTodo={this.handleToggleTodo.bind(this)}
                     />
-                </div>
+                </Paper>
+                {/*<div style={UserListStyle}>*/}
+                    {/*<UserList*/}
+                        {/*token={this.props.token}*/}
+                        {/*users={this.props.users}*/}
+                        {/*// handleToggleTodo={this.handleToggleTodo.bind(this)}*/}
+                    {/*/>*/}
+                {/*</div>*/}
             </div>);
     }
 }

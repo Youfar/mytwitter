@@ -30,12 +30,11 @@ class TimeLine extends Component {
                             title="ホーム"
                             iconElementRight={<FlatButton label="ログアウト" onClick={() => dispatch(logout())}/>}
                         />
-                        {/*<TweetContainer/>*/}
-                        <UserContainer/>
-                        <FollowContainer/>
                         <Tabs>
                             <Tab label="タイムライン">
                                 <TweetContainer/>
+                                <UserContainer/>
+                                <FollowContainer/>
                             </Tab>
                             <Tab label="出勤">
                                 <p>aaaaa</p>

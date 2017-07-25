@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types'
 import { getFollowingsByUserId, getFollowersByUserId} from "../../profile/action";
-import {List, ListItem} from "material-ui";
+import {FlatButton, List, ListItem, Paper} from "material-ui";
 // import UserList from "../component/UserList";
 
 const followPanelStyle = {
@@ -19,6 +19,15 @@ const followPanelStyle = {
     right: 0,
     bottom: 0,
     // margin: 'auto',
+};
+
+const paperStyle = {
+    height: 200,
+    width: 200,
+    marginTop: 100,
+    marginLeft: 100,
+    textAlign: 'center',
+    display: 'inline-block',
 };
 
 class ProfileFollowContainer extends Component {
@@ -39,10 +48,12 @@ class ProfileFollowContainer extends Component {
 
         return (
             <div>
-                <List style={followPanelStyle}>
-                    <ListItem primaryText={"フォロー: " + this.props.targetFollowings.length}  />
-                    <ListItem primaryText={"フォロワー: " + this.props.targetFollowers.length}  />
-                </List>
+                <Paper style ={paperStyle} zDepth={2}>
+                    <h2>Home</h2>
+                    <FlatButton label={"フォロー " + this.props.targetFollowings.length}/>
+                    <FlatButton label={"フォロワー " + this.props.targetFollowers.length}/>
+                    <FlatButton label={"フォローする"}/>
+                </Paper>
             </div>);
     }
 }

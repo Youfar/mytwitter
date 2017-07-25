@@ -2,20 +2,19 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types'
 import {getFollowers, getFollowings} from "../action";
-import {List, ListItem} from "material-ui";
+import {FlatButton, List, ListItem} from "material-ui";
 // import UserList from "../component/UserList";
+import Paper from 'material-ui/Paper';
 
-const followPanelStyle = {
-    marginTop: '200px',
-    marginLeft: '100px',
-    width: '200px',
-    height: '200px',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    // margin: 'auto',
+
+
+const paperStyle = {
+    height: 150,
+    width: 200,
+    marginTop: 50,
+    marginLeft: 100,
+    textAlign: 'center',
+    display: 'inline-block',
 };
 
 class FollowContainer extends Component {
@@ -34,10 +33,12 @@ class FollowContainer extends Component {
     render() {
         return (
             <div>
-                <List style={followPanelStyle}>
-                    <ListItem primaryText={"フォロー " + this.props.followings.length}  />
-                    <ListItem primaryText={"フォロワー " + this.props.followers.length}  />
-                </List>
+                <Paper style ={paperStyle} zDepth={2}>
+                    <h2>Home</h2>
+                    <FlatButton label={"フォロー " + this.props.followings.length}/>
+                    <FlatButton label={"フォロワー " + this.props.followers.length}/>
+                    {/*<button onClick={() => dispatch(addFollowing(token, this.props.params.userId))}>Follow</button>*/}
+                </Paper>
             </div>);
     }
 }

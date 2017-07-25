@@ -23,10 +23,16 @@ const containerStyle = {
     margin: 'auto',
 };
 
-const titleStyle = {
-    marginTop: '100px',
-    marginLeft: '600px',
-    position: 'relative',
+const h1Style = {
+    marginTop: 100,
+    marginLeft: 900,
+    // position: 'relative',
+};
+
+const h2Style = {
+    marginTop: 150,
+    marginLeft: 840,
+    // position: 'relative',
 };
 
 class Login extends Component {
@@ -41,7 +47,8 @@ class Login extends Component {
             <div style={defaultStyle}>
                 <MuiThemeProvider muiTheme={theme}>
                     <div>
-                        <p style={titleStyle}>test</p>
+                        <h1　style={h1Style}>MOTTER</h1>
+                        <h2 style={h2Style}>もうちょっと頑張りましょう</h2>
                         <div style={containerStyle}>
                             <LoginForm
                                 handleLoginSubmit={this.props.handleLoginSubmit}
