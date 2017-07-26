@@ -14,6 +14,39 @@ const styles = {
     },
 };
 
+const testStyle = {
+    // position: 'fixed',
+    height: '150px',
+    width: '450px',
+    // top: '25%',
+    left: '55px',
+    // transform: 'translate(-50%,-50%)',
+    // textAlign: 'center',
+    // display: 'inline-block',
+};
+
+const buttonStyle = {
+    // position: 'fixed',
+    // height: '150px',
+    // width: '450px',
+    top: '50px',
+    // left: '10%',
+    // transform: 'translate(-50%,-50%)',
+    // textAlign: 'center',
+    // display: 'inline-block',
+};
+
+// const textStyle = {
+//     position: 'fixed',
+//     height: '10em',
+//     width: '40em',
+//     top: '25%',
+//     left: '10%',
+//     transform: 'translate(-50%,-50%)',
+//     // textAlign: 'center',
+//     // display: 'inline-block',
+// };
+
 export default class Tweet extends Component {
     static propTypes = {
         handleAddTweet: PropTypes.func.isRequired,
@@ -39,16 +72,17 @@ export default class Tweet extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <TextField type="text" id="tweetContent"
-                               floatingLabelText="な〰にやりますか〰"
+                    <TextField type="text" id="tweetContent" style={testStyle}
+                               floatingLabelText="いまどうしてる"
                                floatingLabelStyle={styles.floatingLabelStyle}
                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                underlineShow={true}
                                multiLine={true}
                                rows={2}
                                rowsMax={4}
+                               maxLength="140"
                     />
-                    <RaisedButton type="submit" label="ツイート" primary={true} />
+                    <RaisedButton style={buttonStyle} type="submit" label="ツイート" primary={true} />
                 </form>
             </div>
         );

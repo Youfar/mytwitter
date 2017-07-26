@@ -33,6 +33,7 @@ class ProfileTweetContainer extends Component {
     }
 
     render() {
+        const { token } = this.props;
 
         return (
             <div>
@@ -50,7 +51,10 @@ class ProfileTweetContainer extends Component {
                             <CardText>
                                 {targetTweet.tweetContent}
                             </CardText>
-
+                            <CardActions>
+                                <FlatButton label="お気に入り"  onClick={() => this.props.handleAddFavoriteTweet(token, targetTweet.tweetId)}/>
+                                <FlatButton label="お気に入り削除"  onClick={() => this.props.handleDeleteFavoriteTweet(token, targetTweet.tweetId)}/>
+                            </CardActions>
                         </Card>
                         )
                     )

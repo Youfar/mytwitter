@@ -11,7 +11,6 @@ import { authReducer } from './auth/reducer';
 import { tokenReducer } from "./token/reducer";
 import { tweetReducer } from "./tweet/reducer";
 import {userReducer} from "./user/reducer";
-import LoginSuccess from "./LoginSuccess";
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import TimeLine from "./timeline/container/TimeLine";
 import Profile from "./profile/container/ProfileContainer";
@@ -46,7 +45,7 @@ const requireAuth = (nextState, replace) => {
     if (!state.authReducer.loginFlg) {
         replace({ pathname: '/' })
     }
-}
+};
 
 render(
     <Provider store={store}>
@@ -61,4 +60,4 @@ render(
         </Router>
     </Provider>,
     document.getElementById('root')
-)
+);

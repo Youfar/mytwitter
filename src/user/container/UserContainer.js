@@ -19,12 +19,13 @@ const UserListStyle = {
 };
 
 const paperStyle = {
-    height: 600,
-    width: 600,
-    marginTop: 100,
-    marginLeft: 1400,
+    position: 'fixed',
+    // height: '15em',
+    width: '15em',
+    top: '35%',
+    right: '10%',
+    transform: 'translate(-50%,-50%)',
     textAlign: 'center',
-    display: 'inline-block',
 };
 
 class UserContainer extends Component {

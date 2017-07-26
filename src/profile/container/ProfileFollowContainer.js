@@ -46,15 +46,15 @@ class ProfileFollowContainer extends Component {
     }
 
     render() {
-        const { targetUserId } = this.props;
+        const { targetUserId, targetUserName, token} = this.props;
 
         return (
             <div>
                 <Paper style ={paperStyle} zDepth={2}>
-                    <h2>Home</h2>
-                    <FlatButton label={"フォロー " + this.props.targetFollowings.length} containerElement={<Link to={"/following/" + targetUserId} />} linkButton={true}/>
-                    <FlatButton label={"フォロワー " + this.props.targetFollowers.length} containerElement={<Link to={"/follower/" + targetUserId} params={{followings: this.props.targetFollowings}}/>} linkButton={true}/>
-                    <FlatButton label={"フォローする"}/>
+                    <h2>{targetUserName}</h2>
+                    <FlatButton label={"フォロー " + this.props.targetFollowings.length} containerElement={<Link to={"/following/" + targetUserId} />}/>
+                    <FlatButton label={"フォロワー " + this.props.targetFollowers.length} containerElement={<Link to={"/follower/" + targetUserId} />}/>
+                    <FlatButton label={"フォローする"} onClick={() => this.props.handleAddFollowing(token, targetUserId)}/>
                 </Paper>
             </div>);
     }

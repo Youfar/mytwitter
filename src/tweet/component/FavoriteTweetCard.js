@@ -4,13 +4,19 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Card, CardActions, CardHeader, CardText, FlatButton} from "material-ui";
+import {connect} from 'react-redux';
 
-export default class FavoriteTweetCard extends Component {
+class FavoriteTweetCard extends Component {
     static propTypes = {
         token: PropTypes.string.isRequired,
         handleAddFavoriteTweet: PropTypes.func.isRequired,
         handleDeleteFavoriteTweet: PropTypes.func.isRequired,
     };
+
+    // componentWillMount() {
+    //     console.log('willMountFavorite');
+    //     this.props.handleFetchFavoriteTweet(this.props.token);
+    // }
 
     render() {
         const { favoriteTweets } = this.props
@@ -43,3 +49,13 @@ export default class FavoriteTweetCard extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        favoriteTweets: state.tweetReducer.favoriteTweets,
+    }
+};
+
+export default connect(
+    mapStateToProps,
+)(FavoriteTweetCard);

@@ -23,16 +23,25 @@ const containerStyle = {
 };
 
 const TweetInputStyle = {
-    marginTop: '100px',
-    marginLeft: '800px',
-    width: '600px',
-    height: '200px',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    // margin: 'auto',
+    // marginTop: '100px',
+    // marginLeft: '800px',
+    // width: '600px',
+    // height: '200px',
+    // position: 'absolute',
+    // top: 0,
+    // left: 0,
+    // right: 0,
+    // bottom: 0,
+    position: 'fixed',
+    // width: '600px',
+    // height: '200px',
+    height: '11em',
+    // border: 'solid 1px #000',
+    width: '40em',
+    top: '22%',
+    left: '50%',
+    transform: 'translate(-50%,-50%)',
+    // textAlign: 'center',
 };
 
 class TweetContainer extends Component {
@@ -59,12 +68,12 @@ class TweetContainer extends Component {
         this.props.dispatchDeleteTweet(tweetId, token);
     };
 
-    handleAddFavoriteTweet(text, token) {
-        this.props.dispatchAddFavoriteTweet(text, token);
+    handleAddFavoriteTweet(token, tweetId) {
+        this.props.dispatchAddFavoriteTweet(token, tweetId);
     };
 
-    handleDeleteFavoriteTweet(tweetId, token) {
-        this.props.dispatchDeleteFavoriteTweet(tweetId, token);
+    handleDeleteFavoriteTweet(token, tweetId) {
+        this.props.dispatchDeleteFavoriteTweet(token, tweetId);
     };
 
     render() {
@@ -80,7 +89,7 @@ class TweetContainer extends Component {
                 <div style={containerStyle}>
                     <Tabs>
                         <Tab
-                            icon={<FontIcon className="material-icons">phone</FontIcon>}
+                            icon={<FontIcon className="material-icons">Recent</FontIcon>}
                             label="最近">
                             <TweetCard
                                 token={this.props.token}
@@ -93,24 +102,18 @@ class TweetContainer extends Component {
                         </Tab>
                         <Tab
                             icon={<FontIcon className="material-icons">favorite</FontIcon>}
-                            label="お気に入り">
+                            label="お気に入り"
+                            onClick={() => this.props.dispatchFetchFavoriteTweet(this.props.token)}>
                             <FavoriteTweetCard
                                 token={this.props.token}
                                 favoriteTweets={this.props.favoriteTweets}
                                 myUserName={this.props.myUserName}
+                                // handleFetchFavoriteTweet={this.handleFetchFavoriteTweet.bind(this)}
                                 handleAddFavoriteTweet={this.handleAddFavoriteTweet.bind(this)}
                                 handleDeleteFavoriteTweet={this.handleDeleteFavoriteTweet.bind(this)}
                             />
                         </Tab>
                     </Tabs>
-                    {/*<TweetCard*/}
-                        {/*token={this.props.token}*/}
-                        {/*tweets={this.props.tweets}*/}
-                        {/*myUserName={this.props.myUserName}*/}
-                        {/*handleDeleteTweet={this.handleDeleteTweet.bind(this)}*/}
-                        {/*handleAddFavoriteTweet={this.handleAddFavoriteTweet.bind(this)}*/}
-                        {/*handleDeleteFavoriteTweet={this.handleDeleteFavoriteTweet.bind(this)}*/}
-                    {/*/>*/}
                 </div>
             </div>);
     }

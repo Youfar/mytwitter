@@ -31,11 +31,10 @@ export default class UserList extends Component {
                     <List>
                     <Subheader>ユーザーリスト</Subheader>
                     {users.map(user => (
-                        <Link to={"/profile/" + user.userId}>
                             <ListItem key={user.userId}
                                   primaryText={user.username}
+                                      containerElement={<Link to={"/profile/" + user.userId}/>}
                             />
-                        </Link>
                         )
                     )}
                     </List>

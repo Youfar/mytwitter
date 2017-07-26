@@ -11,12 +11,14 @@ import Following from "../component/Following";
 
 
 const paperStyle = {
+    position: 'fixed',
     height: '10em',
     width: '10em',
-    marginTop: 50,
-    marginLeft: 100,
+    top: '25%',
+    left: '10%',
+    transform: 'translate(-50%,-50%)',
     textAlign: 'center',
-    display: 'inline-block',
+    // display: 'inline-block',
 };
 
 class FollowContainer extends Component {
@@ -33,14 +35,14 @@ class FollowContainer extends Component {
     }
 
     render() {
-        const { myUserId } = this.props;
+        const { myUserName, myUserId } = this.props;
         return (
             <div>
                 <Paper style ={paperStyle} zDepth={2}>
-                    <h2>Home</h2>
+                    <h2>{myUserName}</h2>
                     {/*<Following followings={this.props.followings}/>*/}
-                    <FlatButton label={"フォロー " + this.props.followings.length} containerElement={<Link to={{pathname:"/following/" + myUserId, query:{followings: this.props.followings}}}/>} linkButton={true}/>
-                    <FlatButton label={"フォロワー " + this.props.followers.length} containerElement={<Link to={"/follower/" + myUserId}/>} linkButton={true}/>
+                    <FlatButton label={"フォロー " + this.props.followings.length} containerElement={<Link to={"/following/" + myUserId}/>}/>
+                    <FlatButton label={"フォロワー " + this.props.followers.length} containerElement={<Link to={"/follower/" + myUserId}/>}/>
                     {/*<button onClick={() => dispatch(addFollowing(token, this.props.params.userId))}>Follow</button>*/}
                 </Paper>
             </div>);
@@ -50,6 +52,7 @@ class FollowContainer extends Component {
 const mapStateToProps = (state) => {
     return {
         token: state.tokenReducer.token,
+        myUserName: state.tokenReducer.username,
         myUserId: state.authReducer.userId,
         followings: state.followReducer.followings,
         followers: state.followReducer.followers,

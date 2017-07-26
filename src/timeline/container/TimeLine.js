@@ -5,10 +5,9 @@ import theme from '../../material_ui_raw_theme_file';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import TweetContainer from "../../tweet/container/TweetContainer";
+import TargetContainer from "../../target/container/TargetContainer"
 import {getMyUserId, logout} from '../../auth/action';
 import UserContainer from "../../user/container/UserContainer";
-// import {authReducer as prevProps} from "../../auth/reducer";
-import {tokenReducer as prevProps} from "../../token/reducer";
 import FollowContainer from "../../follow/container/FollowContainer";
 import {Tabs, Tab} from 'material-ui/Tabs';
 
@@ -43,19 +42,14 @@ class TimeLine extends Component {
                                 <FollowContainer/>
                             </Tab>
                             <Tab label="出勤">
-                                <p>aaaaa</p>
+                                {/*<TargetContainer/>*/}
+                                <p>coming soon</p>
                             </Tab>
                         </Tabs>
                     </div>
                 </MuiThemeProvider>
             </div>);
     }
-
-    // componentWillUpdate(nextProps) {
-    //     if (nextProps.token !== prevProps.token) {
-    //         console.log("aaaaa");
-    //     }
-    // }
 }
 
 function mapStateToProps(state) {

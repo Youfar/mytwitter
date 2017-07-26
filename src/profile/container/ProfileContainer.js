@@ -4,11 +4,14 @@ import { connect } from 'react-redux';
 import {addFollowing} from "../../follow/action";
 import {logout} from '../../auth/action';
 import { getUserByUserId } from '../action';
+import {addFavoriteTweet, deleteFavoriteTweet} from "../../tweet/action";
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import theme from '../../material_ui_raw_theme_file';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
+import IconButton from 'material-ui/IconButton';
+import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import ProfileFollowContainer from "./ProfileFollowContainer";
 import ProfileTweetContainer from "./ProfileTweetContainer";
 
@@ -30,6 +33,8 @@ class Profile extends Component {
     static propTypes = {
         dispatch: PropTypes.func,
         token: PropTypes.string,
+        dispatchAddFavoriteTweet: PropTypes.func.isRequired,
+        dispatchDeleteFavoriteTweet: PropTypes.func.isRequired,
         // targetUserId: PropTypes.number.isRequired,
         // userId: PropTypes.number.isRequired,
         // deleteTweet: PropTypes.func.isRequired,
@@ -40,6 +45,18 @@ class Profile extends Component {
         console.log('willMount');
         this.props.dispatchFetchUser(this.props.params.userId);
     }
+
+    handleAddFollowing(token, userId) {
+        this.props.dispatchAddFollowing(token, userId);
+    }
+
+    handleAddFavoriteTweet(token, tweetId) {
+        this.props.dispatchAddFavoriteTweet(token, tweetId);
+    };
+
+    handleDeleteFavoriteTweet(token, tweetId) {
+        this.props.dispatchDeleteFavoriteTweet(token, tweetId);
+    };
 
     // const { targetUserId } = this.props.params.userId
 
@@ -52,24 +69,27 @@ class Profile extends Component {
                 <MuiThemeProvider muiTheme={theme}>
                     <div>
                         <AppBar
-                            title={targetUser.username}
+                            title="ホーム"
+                            // iconElementLeft={<IconButton><NavigationClose /></IconButton>}
                             iconElementRight={<FlatButton label="ログアウト" onClick={() => dispatch(logout())}/>}
                         />
-                        {/*<h1>welcome {this.props.params.userId}</h1>*/}
-                        {/*<h1>welcome {targetUser.username}</h1>*/}
-                        <button onClick={() => dispatch(addFollowing(token, this.props.params.userId))}>Follow</button>
-                        {/*<TweetContainer/>*/}
-                        {/*<UserContainer/>*/}
-                        <ProfileFollowContainer targetUserId={this.props.params.userId}/>
+
+                        <ProfileFollowContainer
+                            token={token}
+                            targetUserId={this.props.params.userId}
+                            targetUserName={targetUser.username}
+                            handleAddFollowing={this.handleAddFollowing.bind(this)}
+                        />
                         <div style ={tweetStyle}>
-                            <ProfileTweetContainer targetUserId={this.props.params.userId}/>
+                            <ProfileTweetContainer
+                                token={token}
+                                targetUserId={this.props.params.userId}
+                                handleAddFavoriteTweet={this.handleAddFavoriteTweet.bind(this)}
+                                handleDeleteFavoriteTweet={this.handleDeleteFavoriteTweet.bind(this)}
+                            />
                         </div>
                     </div>
                 </MuiThemeProvider>
-                {/*<h1>welcome {userId}</h1>*/}
-                {/*<h1>welcome {this.props.params.userId}</h1>*/}
-                {/*<button onClick={() => dispatch(addFollowing(token, this.props.params.userId))}>Follow</button>*/}
-                {/*<button>Follow</button>*/}
             </div>
         )
     }
@@ -85,8 +105,14 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     const dispatchFetchUser = (userId) => dispatch(getUserByUserId(userId));
+    const dispatchAddFollowing = (token, userId) => dispatch(addFollowing(token, userId));
+    const dispatchAddFavoriteTweet = (token, tweetId) => dispatch(addFavoriteTweet(token, tweetId));
+    const dispatchDeleteFavoriteTweet = (token, tweetId) => dispatch(deleteFavoriteTweet(token, tweetId));
     return {
         dispatchFetchUser,
+        dispatchAddFollowing,
+        dispatchAddFavoriteTweet,
+        dispatchDeleteFavoriteTweet,
         dispatch: dispatch
     }
 }

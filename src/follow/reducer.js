@@ -46,5 +46,5 @@ export const followReducer = handleActions(
         //     })
         // },
 
-    }, {text: "", followings: [], followers: []}
+    }, {targetUserId:0 ,text: "", followings: [], followers: []}
 )

@@ -5,11 +5,6 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import Divider from 'material-ui/Divider';
 import TextField from 'material-ui/TextField';
 
-const defaultPStyle = {
-    color: '#000',
-    textAlign: 'center',
-};
-
 const LoginButtonStyle = {
     margin: 12,
     textAlign: 'center',

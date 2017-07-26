@@ -30,7 +30,7 @@ export default class TweetCard extends Component {
                                 {/*disable={myUserName===tweet.creator.username ? true : false}*/}
                             </CardText>
                             <CardActions>
-                                <FlatButton label="お気に入り"  onClick={() => this.props.handleAddFavoriteTweet(this.props.token, tweet.tweetId)}/>
+                                <FlatButton label="お気に入り"  onClick={() => {this.props.handleAddFavoriteTweet(this.props.token, tweet.tweetId); }}/>
                                 <FlatButton label="お気に入り削除"  onClick={() => this.props.handleDeleteFavoriteTweet(this.props.token, tweet.tweetId)}/>/>
                                 <FlatButton label="削除" disabled={myUserName===tweet.creator.username ? false : true} onClick={() => this.props.handleDeleteTweet(this.props.token, tweet.tweetId)} />
                             </CardActions>
