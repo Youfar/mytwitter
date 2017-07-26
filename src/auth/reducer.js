@@ -30,5 +30,15 @@ export const authReducer = handleActions({
                 loginMsg: action.payload.message
             }),
         },
+
+        REQUEST_GET_MY_USER_ID: (state, action) => Object.assign({}, state, {}),
+        COMPLETE_GET_MY_USER_ID: {
+            next: (state, action) => Object.assign({}, state, {
+                userId: action.payload.userId
+            }),
+            throw: (state, action) => Object.assign({}, state, {
+                loginMsg: action.payload.message
+            }),
+    },
     }, {userId: 0,  signUpMsg: "", loginMsg: "", loginFlg: false, signUpFlg: false}
 );

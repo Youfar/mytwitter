@@ -5,6 +5,9 @@ import { addTweet, loadTweets } from "../../tweet/action"
 import Tweet from '../component/Tweet';
 import TweetCard from "../component/TweetCard";
 import {addFavoriteTweet, deleteFavoriteTweet, deleteTweet, loadFavoriteTweets} from "../action";
+import {Tabs, Tab} from 'material-ui/Tabs';
+import FontIcon from 'material-ui/FontIcon';
+import FavoriteTweetCard from "../component/FavoriteTweetCard";
 
 const containerStyle = {
     marginTop: '200px',
@@ -45,6 +48,7 @@ class TweetContainer extends Component {
     componentWillMount() {
         console.log('willMount');
         this.props.dispatchFetchTweet(this.props.token);
+        this.props.dispatchFetchFavoriteTweet(this.props.token);
     }
 
     handleAddTweet(text, token) {
@@ -74,14 +78,39 @@ class TweetContainer extends Component {
                     />
                 </div>
                 <div style={containerStyle}>
-                    <TweetCard
-                        token={this.props.token}
-                        tweets={this.props.tweets}
-                        myUserName={this.props.myUserName}
-                        handleDeleteTweet={this.handleDeleteTweet.bind(this)}
-                        handleAddFavoriteTweet={this.handleAddFavoriteTweet.bind(this)}
-                        handleDeleteFavoriteTweet={this.handleDeleteFavoriteTweet.bind(this)}
-                    />
+                    <Tabs>
+                        <Tab
+                            icon={<FontIcon className="material-icons">phone</FontIcon>}
+                            label="最近">
+                            <TweetCard
+                                token={this.props.token}
+                                tweets={this.props.tweets}
+                                myUserName={this.props.myUserName}
+                                handleDeleteTweet={this.handleDeleteTweet.bind(this)}
+                                handleAddFavoriteTweet={this.handleAddFavoriteTweet.bind(this)}
+                                handleDeleteFavoriteTweet={this.handleDeleteFavoriteTweet.bind(this)}
+                            />
+                        </Tab>
+                        <Tab
+                            icon={<FontIcon className="material-icons">favorite</FontIcon>}
+                            label="お気に入り">
+                            <FavoriteTweetCard
+                                token={this.props.token}
+                                favoriteTweets={this.props.favoriteTweets}
+                                myUserName={this.props.myUserName}
+                                handleAddFavoriteTweet={this.handleAddFavoriteTweet.bind(this)}
+                                handleDeleteFavoriteTweet={this.handleDeleteFavoriteTweet.bind(this)}
+                            />
+                        </Tab>
+                    </Tabs>
+                    {/*<TweetCard*/}
+                        {/*token={this.props.token}*/}
+                        {/*tweets={this.props.tweets}*/}
+                        {/*myUserName={this.props.myUserName}*/}
+                        {/*handleDeleteTweet={this.handleDeleteTweet.bind(this)}*/}
+                        {/*handleAddFavoriteTweet={this.handleAddFavoriteTweet.bind(this)}*/}
+                        {/*handleDeleteFavoriteTweet={this.handleDeleteFavoriteTweet.bind(this)}*/}
+                    {/*/>*/}
                 </div>
             </div>);
     }
@@ -92,21 +121,22 @@ const mapStateToProps = (state) => {
         token: state.tokenReducer.token,
         myUserName: state.tokenReducer.username,
         tweets: state.tweetReducer.tweets,
+        favoriteTweets: state.tweetReducer.favoriteTweets,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     const dispatchFetchTweet = (token) => dispatch(loadTweets(token));
+    const dispatchFetchFavoriteTweet = (token) => dispatch(loadFavoriteTweets(token));
     const dispatchAddTweet = (tweetContent, token) => dispatch(addTweet(tweetContent, token));
     const dispatchDeleteTweet = (token, tweetId) => dispatch(deleteTweet(token, tweetId));
-    const dispatchFetchFavoriteTweet = (token) => dispatch(loadFavoriteTweets(token));
     const dispatchAddFavoriteTweet = (token, tweetId) => dispatch(addFavoriteTweet(token, tweetId));
     const dispatchDeleteFavoriteTweet = (token, tweetId) => dispatch(deleteFavoriteTweet(token, tweetId));
     return {
         dispatchFetchTweet,
+        dispatchFetchFavoriteTweet,
         dispatchAddTweet,
         dispatchDeleteTweet,
-        dispatchFetchFavoriteTweet,
         dispatchAddFavoriteTweet,
         dispatchDeleteFavoriteTweet,
     };

@@ -7,6 +7,7 @@ import PropTypes from 'prop-types'
 import { getFollowingsByUserId, getFollowersByUserId} from "../../profile/action";
 import {FlatButton, List, ListItem, Paper} from "material-ui";
 // import UserList from "../component/UserList";
+import {Link} from "react-router";
 
 const followPanelStyle = {
     marginTop: '200px',
@@ -45,13 +46,14 @@ class ProfileFollowContainer extends Component {
     }
 
     render() {
+        const { targetUserId } = this.props;
 
         return (
             <div>
                 <Paper style ={paperStyle} zDepth={2}>
                     <h2>Home</h2>
-                    <FlatButton label={"フォロー " + this.props.targetFollowings.length}/>
-                    <FlatButton label={"フォロワー " + this.props.targetFollowers.length}/>
+                    <FlatButton label={"フォロー " + this.props.targetFollowings.length} containerElement={<Link to={"/following/" + targetUserId} />} linkButton={true}/>
+                    <FlatButton label={"フォロワー " + this.props.targetFollowers.length} containerElement={<Link to={"/follower/" + targetUserId} params={{followings: this.props.targetFollowings}}/>} linkButton={true}/>
                     <FlatButton label={"フォローする"}/>
                 </Paper>
             </div>);

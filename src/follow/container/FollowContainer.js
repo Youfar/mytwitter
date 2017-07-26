@@ -5,12 +5,14 @@ import {getFollowers, getFollowings} from "../action";
 import {FlatButton, List, ListItem} from "material-ui";
 // import UserList from "../component/UserList";
 import Paper from 'material-ui/Paper';
+import {Link} from "react-router";
+import Following from "../component/Following";
 
 
 
 const paperStyle = {
-    height: 150,
-    width: 200,
+    height: '10em',
+    width: '10em',
     marginTop: 50,
     marginLeft: 100,
     textAlign: 'center',
@@ -31,12 +33,14 @@ class FollowContainer extends Component {
     }
 
     render() {
+        const { myUserId } = this.props;
         return (
             <div>
                 <Paper style ={paperStyle} zDepth={2}>
                     <h2>Home</h2>
-                    <FlatButton label={"フォロー " + this.props.followings.length}/>
-                    <FlatButton label={"フォロワー " + this.props.followers.length}/>
+                    {/*<Following followings={this.props.followings}/>*/}
+                    <FlatButton label={"フォロー " + this.props.followings.length} containerElement={<Link to={{pathname:"/following/" + myUserId, query:{followings: this.props.followings}}}/>} linkButton={true}/>
+                    <FlatButton label={"フォロワー " + this.props.followers.length} containerElement={<Link to={"/follower/" + myUserId}/>} linkButton={true}/>
                     {/*<button onClick={() => dispatch(addFollowing(token, this.props.params.userId))}>Follow</button>*/}
                 </Paper>
             </div>);
@@ -46,6 +50,7 @@ class FollowContainer extends Component {
 const mapStateToProps = (state) => {
     return {
         token: state.tokenReducer.token,
+        myUserId: state.authReducer.userId,
         followings: state.followReducer.followings,
         followers: state.followReducer.followers,
     }

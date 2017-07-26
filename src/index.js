@@ -19,6 +19,8 @@ import persistState from 'redux-localstorage';
 import App from "./App";
 import {followReducer} from "./follow/reducer";
 import {profileReducer} from "./profile/reducer";
+import Following from "./follow/component/Following"
+import Follower from "./follow/component/Follower"
 
 injectTapEventPlugin();
 
@@ -53,6 +55,8 @@ render(
             <Route path="/app" component={App}/>
             <Route path="/TimeLine" component={TimeLine} onEnter={requireAuth}/>
             <Route path="/profile/:userId" component={Profile}/>
+            <Route path="/following/:userId" component={Following}/>
+            <Route path="/follower/:userId" component={Follower}/>
             {/*<Route path="/loginSuccess" component={LoginSuccess} onEnter={requireAuth}/>*/}
         </Router>
     </Provider>,

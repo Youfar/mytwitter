@@ -120,3 +120,50 @@ export function logout() {
         // });
     }
 }
+
+const GET_MY_USER_ID_URL = 'http://localhost:8080/getMyUserId';
+export const GET_MY_USER_ID_ACTIONS = {
+    REQUEST_GET_MY_USER_ID: 'REQUEST_GET_MY_USER_ID',
+    COMPLETE_GET_MY_USER_ID: 'COMPLETE_GET_MY_USER_ID',
+};
+
+const requestGetMyUserId = createAction(GET_MY_USER_ID_ACTIONS.REQUEST_GET_MY_USER_ID);
+const completeGetMyUserId = createAction(GET_MY_USER_ID_ACTIONS.COMPLETE_GET_MY_USER_ID, (userId) => ({userId: userId}));
+
+export function getMyUserId(token) {
+    return function(dispatch) {
+        dispatch(requestGetMyUserId());
+        const headers = new Headers();
+        headers.append("x-auth-token", token);
+        return fetch(GET_MY_USER_ID_URL, {
+            mode: 'cors',
+            method: 'GET',
+            headers: headers,
+        }).then(function(response) {
+            if (response.status === 401) {
+                throw Error();
+            }
+            return response.json();
+        }).then(function(json){
+            dispatch(completeGetMyUserId(json));
+        }).catch(function(err) {
+            dispatch(completeGetMyUserId(err));
+        });
+        // return fetch(LOGOUT_URL, {
+        //     mode: 'cors',
+        //     method: 'POST',
+        // }).then(function(response) {
+        //     console.log("01");
+        //     return response.json();
+        // }).then(function (json) {
+        //     console.log("02");
+        //     dispatch(completeLogout());
+        //     dispatch(removeToken());
+        //     browserHistory.push('/');
+        // }).catch(function (err) {
+        //     console.log("03");
+        //     dispatch(completeLogout(err));
+        //     dispatch(removeToken());
+        // });
+    };
+}

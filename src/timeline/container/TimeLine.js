@@ -5,7 +5,7 @@ import theme from '../../material_ui_raw_theme_file';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import TweetContainer from "../../tweet/container/TweetContainer";
-import {logout} from '../../auth/action';
+import {getMyUserId, logout} from '../../auth/action';
 import UserContainer from "../../user/container/UserContainer";
 // import {authReducer as prevProps} from "../../auth/reducer";
 import {tokenReducer as prevProps} from "../../token/reducer";
@@ -19,6 +19,12 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 //     display: flex,
 // };
 class TimeLine extends Component {
+
+    componentWillMount() {
+        const { token } = this.props;
+        console.log('aaaa');
+        this.props.dispatchFetchUserId(token);
+    }
 
     render() {
         const { dispatch } = this.props;
@@ -45,21 +51,25 @@ class TimeLine extends Component {
             </div>);
     }
 
-    componentWillUpdate(nextProps) {
-        if (nextProps.token !== prevProps.token) {
-            console.log("aaaaa");
-        }
-    }
+    // componentWillUpdate(nextProps) {
+    //     if (nextProps.token !== prevProps.token) {
+    //         console.log("aaaaa");
+    //     }
+    // }
 }
 
 function mapStateToProps(state) {
     return {
         loginFlg: state.authReducer.loginFlg,
+        myUserId: state.authReducer.userId,
+        token: state.tokenReducer.token,
     }
 }
 
 function mapDispatchToProps(dispatch) {
+    const dispatchFetchUserId = (token) => dispatch(getMyUserId(token))
     return {
+        dispatchFetchUserId,
         dispatch: dispatch
     }
 }

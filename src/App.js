@@ -9,7 +9,7 @@ class App extends Component {
         {(() => {
             if(token !== null) {
                 return (<div>
-                    <TimeLine/>
+                    <TimeLine token={token}/>
                 </div>)
             } else {
                 return <h1>You are not logged in</h1>
