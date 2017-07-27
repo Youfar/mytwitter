@@ -14,12 +14,12 @@ const styles = {
     },
 };
 
-const testStyle = {
+const tweetInputStyle = {
     // position: 'fixed',
     height: '150px',
     width: '450px',
-    // top: '25%',
-    left: '55px',
+    top: '35%',
+    left: '50%',
     // transform: 'translate(-50%,-50%)',
     // textAlign: 'center',
     // display: 'inline-block',
@@ -72,7 +72,7 @@ export default class Tweet extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <TextField type="text" id="tweetContent" style={testStyle}
+                    <TextField type="text" id="tweetContent"
                                floatingLabelText="いまどうしてる"
                                floatingLabelStyle={styles.floatingLabelStyle}
                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}

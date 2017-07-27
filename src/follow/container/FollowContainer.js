@@ -11,12 +11,12 @@ import Following from "../component/Following";
 
 
 const paperStyle = {
-    position: 'fixed',
-    height: '10em',
-    width: '10em',
-    top: '25%',
-    left: '10%',
-    transform: 'translate(-50%,-50%)',
+    position: 'absolute',
+    height: '150px',
+    width: '200px',
+    top: '35%',
+    left: '5%',
+    // transform: 'translate(-50%,-50%)',
     textAlign: 'center',
     // display: 'inline-block',
 };

@@ -16,16 +16,20 @@ import ProfileFollowContainer from "./ProfileFollowContainer";
 import ProfileTweetContainer from "./ProfileTweetContainer";
 
 const tweetStyle = {
-    marginTop: '200px',
-    marginLeft: '700px',
-    width: '600px',
-    height: '200px',
+    // marginTop: '200px',
+    // marginLeft: '700px',
+    // width: '600px',
+    // height: '200px',
     position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    // top: 0,
+    // left: 0,
+    // right: 0,
+    // bottom: 0,
     // margin: 'auto',
+    height: '150px',
+    width: '600px',
+    top: '25%',
+    left: '30%',
 };
 
 class Profile extends Component {

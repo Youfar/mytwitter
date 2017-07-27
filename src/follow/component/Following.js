@@ -19,7 +19,7 @@ const paperStyle = {
     position: 'fixed',
     // height: '15em',
     width: '50%',
-    top: '20%',
+    top: '30%',
     left: '50%',
     transform: 'translate(-50%,-50%)',
     textAlign: 'center',

@@ -42,7 +42,7 @@ class Follower extends Component {
                         />
                         <Paper style ={paperStyle} zDepth={2}>
                             <List>
-                                <Subheader>フォローリスト</Subheader>
+                                <Subheader>フォロワーリスト</Subheader>
                                 {targetFollowers.map((targetFollower, i) => (
                                     <Link to={"/profile/" + i}>
                                         <ListItem key={i}

@@ -9,17 +9,27 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import FontIcon from 'material-ui/FontIcon';
 import FavoriteTweetCard from "../component/FavoriteTweetCard";
 
+//TODO xiugai
 const containerStyle = {
-    marginTop: '200px',
-    marginLeft: '700px',
-    width: '600px',
-    height: '200px',
     position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    // width: '600px',
+    // height: '200px',
+    // height: '11em',
+    // border: 'solid 1px #000',
+    width: '40em',
+    top: '150px',
+    left: '25%',
     // margin: 'auto',
+
+    // marginTop: '200px',
+    // marginLeft: '700px',
+    // width: '600px',
+    // height: '200px',
+    // position: 'absolute',
+    // top: 0,
+    // left: 0,
+    // right: 0,
+    // bottom: 0,
 };
 
 const TweetInputStyle = {
@@ -32,15 +42,15 @@ const TweetInputStyle = {
     // left: 0,
     // right: 0,
     // bottom: 0,
-    position: 'fixed',
+    position: 'absolute',
     // width: '600px',
     // height: '200px',
     height: '11em',
     // border: 'solid 1px #000',
     width: '40em',
     top: '22%',
-    left: '50%',
-    transform: 'translate(-50%,-50%)',
+    left: '40%',
+    // transform: 'translate(-50%,-50%)',
     // textAlign: 'center',
 };
 

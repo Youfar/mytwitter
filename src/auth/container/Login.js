@@ -28,7 +28,7 @@ import theme from '../../material_ui_raw_theme_file';
 const LoginStyle = {
     height: '30%',
     width: '40%',
-    border: 'solid 1px #000',
+    // border: 'solid 1px #000',
     position: 'fixed',
     top: '50%',
     left: '50%',
